@@ -1,0 +1,56 @@
+from .model import time_delay_prediction_model_pipeline
+from .model import actual_cost_prediction_model_pipeline
+from fastapi import FastAPI, HTTPException
+from .schemas import TimeDelayPredictionInput, ActualCostPredictionInput
+
+# Initialize FastAPI app
+app = FastAPI()
+
+@app.get("/")
+def health_check():
+    """
+    Health check endpoint to verify that the API is running.
+    """
+    return {"status": "API is running"}
+
+
+@app.post("/predict_time_delay")
+def predict_time_delay(data: TimeDelayPredictionInput):
+    """
+    Predicts the time delay (in hours) for logistics and transportation operations.
+
+    Args:
+        data (TimeDelayPredictionInput): Input features for time delay model.
+
+    Returns:
+        dict: Predicted delay in hours.
+    """
+    try:
+        data_dict = data.model_dump()
+        predictions = time_delay_prediction_model_pipeline(data_dict)
+        return {"Time Delay (In Hours)": predictions.tolist()}
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=f"Invalid input: {str(ve)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to make prediction: {str(e)}")
+
+
+@app.post("/predict_actual_cost")
+def predict_actual_cost(input_data: ActualCostPredictionInput):
+    """
+    Predicts the actual cost of a construction project based on the input features.
+
+    Args:
+        input_data (ActualCostPredictionInput): Input features for cost prediction.
+
+    Returns:
+        dict: Predicted project cost in USD.
+    """
+    try:
+        data_dict = input_data.model_dump()
+        predictions = actual_cost_prediction_model_pipeline(data_dict)
+        return {"Predicted Actual Cost of Project (USD)": predictions.tolist()}
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=f"Invalid input: {str(ve)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to make prediction: {str(e)}")
