@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: delay_prediction_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
