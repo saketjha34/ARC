@@ -10,6 +10,10 @@
   body {
     @apply bg-gray-50 text-gray-900;
   }
+  
+  * {
+    box-sizing: border-box;
+  }
 }
 
 @layer components {
@@ -35,5 +39,33 @@
   
   .construction-gradient {
     background: linear-gradient(135deg, #f37a0a 0%, #bd4708 100%);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 }
