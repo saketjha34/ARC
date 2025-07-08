@@ -1,8 +1,9 @@
-from .model import time_delay_prediction_model_pipeline
-from .model import actual_cost_prediction_model_pipeline
+from api.model import time_delay_prediction_model_pipeline
+from api.model import actual_cost_prediction_model_pipeline
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from .schemas import TimeDelayPredictionInput, ActualCostPredictionInput
+from api.schema.predict_time_delay import TimeDelayPredictionInput
+from api.schema.predict_actual_cost import ActualCostPredictionInput
 
 # Initialize FastAPI app
 app = FastAPI()
