@@ -4,7 +4,7 @@ import { ClockIcon, TruckIcon } from '@heroicons/react/24/outline';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { Alert } from '../ui/Alert';
 import { apiService } from '../../services/api';
-import { TimeDelayPredictionInput, TimeDelayResponse } from '../../types/api';
+import type { TimeDelayPredictionInput, TimeDelayResponse } from '../../types/api';
 
 interface FormData {
   timestamp: string;

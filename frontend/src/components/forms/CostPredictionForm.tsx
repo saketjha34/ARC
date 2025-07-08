@@ -4,7 +4,7 @@ import { CurrencyDollarIcon, BuildingOffice2Icon } from '@heroicons/react/24/out
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { Alert } from '../ui/Alert';
 import { apiService } from '../../services/api';
-import { ActualCostPredictionInput, ActualCostResponse } from '../../types/api';
+import type { ActualCostPredictionInput, ActualCostResponse } from '../../types/api';
 
 interface FormData {
   Project_Type: string;
