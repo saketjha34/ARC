@@ -4,7 +4,11 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from api.schema.predict_time_delay import TimeDelayPredictionInput
 from api.schema.predict_actual_cost import ActualCostPredictionInput
-from api.core.load_env import FRONTEND_URL
+# from api.core.load_env import FRONTEND_URL
+from dotenv import load_dotenv
+load_dotenv()
+import os
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -12,7 +16,8 @@ app = FastAPI()
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080", FRONTEND_URL],  # Frontend URL
+    # allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", FRONTEND_URL],  # Frontend URL
+    allow_origins=[FRONTEND_URL],  # Frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
